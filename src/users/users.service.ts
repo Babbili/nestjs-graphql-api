@@ -13,9 +13,11 @@ export class UsersService {
         return this.UsersModel.find(user => user.userId === getUserArgs.userId)
         
     }
+
     getUsers(): UserModel[] {
         return this.UsersModel
     }
+
     createUser(createUserData: CreateUserInput): UserModel {
         let user = {
             userId: uuidv4(), // generate randon userId using uuid package
@@ -24,12 +26,17 @@ export class UsersService {
         this.UsersModel.push(user)
         return user
     }
+
     updateUser(updateUserData: UpdateUserInput): UserModel {
         let user = this.UsersModel.find(user => user.userId === updateUserData.userId)
         Object.assign(user, updateUserData) // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
         return user
     }
-    deleteUser(): UserModel {
-        return 
+
+    deleteUser(getUserArgs: GetUserArgs): UserModel {
+        let user = this.UsersModel.find(user => user.userId === getUserArgs.userId)
+        let indexOfUser = this.UsersModel.indexOf(user)
+        this.UsersModel.splice(indexOfUser, 1) // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice
+        return user
     }
 }

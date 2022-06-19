@@ -32,4 +32,9 @@ export class UsersResolver {
         return this.userService.updateUser(updateUserData)
     }
 
+    @Mutation(returns => UserModel)
+    deleteUser(@Args() getUserArgs: GetUserArgs): UserModel {
+        return this.userService.deleteUser(getUserArgs)
+    }
+
 }
