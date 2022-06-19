@@ -7,11 +7,15 @@ import { UpdateUserInput } from './dto/input/update-user.input';
 
 @Injectable()
 export class UsersService {
-    constructor(private UsersModel: UserModel[] ) {}
+    private UsersModel: UserModel[] = []
 
     getUser(getUserArgs: GetUserArgs): UserModel {
         return this.UsersModel.find(user => user.userId === getUserArgs.userId)
         
+    }
+
+    getUserByEmail(email: string): UserModel | null {
+        return this.UsersModel.find(user => user.email === email)
     }
 
     getUsers(): UserModel[] {

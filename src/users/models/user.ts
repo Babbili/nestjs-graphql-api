@@ -10,6 +10,9 @@ export class UserModel {
     @Field()
     email: string;
 
+    @Field()
+    hashedPass?: string;
+
     @Field(type => Int)
     age?: number;
 
