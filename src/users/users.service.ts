@@ -3,6 +3,7 @@ import { GetUserArgs } from './dto/args/get-user.args';
 import { CreateUserInput } from './dto/input/create-user.input';
 import { UserModel } from './models/user';
 import { v4 as uuidv4 } from 'uuid'; // https://www.npmjs.com/package/uuid
+import { UpdateUserInput } from './dto/input/update-user.input';
 
 @Injectable()
 export class UsersService {
@@ -10,6 +11,7 @@ export class UsersService {
 
     getUser(getUserArgs: GetUserArgs): UserModel {
         return this.UsersModel.find(user => user.userId === getUserArgs.userId)
+        
     }
     getUsers(): UserModel[] {
         return this.UsersModel
@@ -22,8 +24,10 @@ export class UsersService {
         this.UsersModel.push(user)
         return user
     }
-    updateUser(): UserModel {
-        return 
+    updateUser(updateUserData: UpdateUserInput): UserModel {
+        let user = this.UsersModel.find(user => user.userId === updateUserData.userId)
+        Object.assign(user, updateUserData) // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
+        return user
     }
     deleteUser(): UserModel {
         return 
